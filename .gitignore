@@ -1,0 +1,103 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+# .gitignore 文件
+
+# 编译产物
+*.class
+*.ctxt
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.cache
+*.ldb
+*.mdmp
+*.sqlite
+
+# 项目相关
+.project
+.settings/
+.classpath
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# 依赖文件
+node_modules/
+bower_components/
+jspm_packages/
+*.tgz
+yarn.lock
+package-lock.json
+
+# 操作系统产生的文件
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 个人IDE配置
+*.orig
+*.pyc
+*.pyo
+*.userprefs
+
+# 版本控制系统产生的文件
+.svn/
+.hg/
+.hgignore
+.hgcheck
+.cvs/
+.scc
+
+# 日志文件
+logs/
+
+# 环境配置文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 编译工具产生的文件
+dist/
+build/
+target/
+out/
