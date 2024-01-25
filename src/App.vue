@@ -15,6 +15,13 @@ async function get_nodes() {
   nodes.value = await invoke('get_nodes_from_url', {link: subscribe_link.value});
 }
 
+// 从文件中获取订阅地址
+async function get_cached_url(){
+  subscribe_link.value = await  invoke('get_subscription_url_from_file');
+}
+
+get_cached_url();
+
 function handle_select_node(node: SsNode) {
   node.local_address = '127.0.0.1';
   node.local_port = local_port.value;

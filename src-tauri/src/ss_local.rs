@@ -1,5 +1,7 @@
 #[cfg(windows)]
 use std::fs::File;
+#[cfg(windows)]
+use std::io::Write;
 use crate::PROGRAM_DIR;
 use std::process::Command;
 
