@@ -30,7 +30,7 @@ fn get_nodes_from_url(link: &str) -> Result<Vec<Node>, String> {
 }
 
 #[tauri::command]
-fn () -> Result<String, String> {
+fn get_subscription_url_from_file() -> Result<String, String> {
     let subscription_url = PROGRAM_DIR.join("subscribe.txt");
     let url = std::fs::read_to_string(subscription_url).map_err(|_e| "".to_string())?;
     Ok(url)
