@@ -27,6 +27,7 @@ pub struct Node {
     pub plugin_opts: String,
     pub local_address: String,
     pub local_port: u16,
+    pub remarks: String,
 }
 
 impl AsRef<AndroidNode> for AndroidNode {
@@ -48,6 +49,7 @@ impl<T> From<T> for Node
             method: item.method.clone(),
             plugin: item.plugin.clone().unwrap_or_default(),
             plugin_opts: item.plugin_opts.clone().unwrap_or_default(),
+            remarks: item.remarks.clone().unwrap_or_default(),
             local_address: "127.0.0.1".into(),
             local_port: 1087,
         }

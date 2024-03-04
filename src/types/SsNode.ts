@@ -7,5 +7,6 @@ export interface SsNode {
     'plugin-opts': string;
     local_address: string;
     local_port: number;
+    remarks: string;
 }
 

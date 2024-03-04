@@ -18,7 +18,7 @@ function useNode() {
 
 <template>
   <div class="node-item bg-gray-800 rounded-lg p-4 my-2 shadow-md">
-    <span class="text-white text-lg">{{ node.server }}:{{ node.server_port }}</span>
+    <span class="text-white text-lg">{{ node.remarks }}</span>
     <button
         @click="useNode"
         :disabled="isUsed"

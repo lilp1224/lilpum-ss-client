@@ -4,6 +4,7 @@
 use std::env;
 use std::path::PathBuf;
 use lazy_static::lazy_static;
+use log::info;
 use crate::ss_node::{get_nodes, Node, write_config};
 
 mod ss_local;
@@ -21,7 +22,6 @@ lazy_static! {
 
 #[tauri::command]
 fn get_nodes_from_url(link: &str) -> Result<Vec<Node>, String> {
-    println!("============ url: {}", link);
     let nodes = get_nodes(link).map_err(|e| e.to_string())?;
     // 把这个订阅地址写入到文件中 以便下次启动时使用
     let subscription_url = PROGRAM_DIR.join("subscribe.txt");
@@ -32,13 +32,13 @@ fn get_nodes_from_url(link: &str) -> Result<Vec<Node>, String> {
 #[tauri::command]
 fn get_subscription_url_from_file() -> Result<String, String> {
     let subscription_url = PROGRAM_DIR.join("subscribe.txt");
+    info!("subscription_url: {:?}", subscription_url);
     let url = std::fs::read_to_string(subscription_url).map_err(|_e| "".to_string())?;
     Ok(url)
 }
 
 #[tauri::command]
 fn start_sslocal(node: Node) -> Result<String, String> {
-    println!("============ node: {:?}", node);
     write_config(&node).map_err(|e| e.to_string())?;
     println!("config.json written");
     ss_local::start_sslocal().map_err(|e| e.to_string())?;
@@ -46,9 +46,9 @@ fn start_sslocal(node: Node) -> Result<String, String> {
 }
 
 fn main() {
-    println!("=====================");
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![get_nodes_from_url,start_sslocal,get_subscription_url_from_file])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
+

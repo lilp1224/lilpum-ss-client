@@ -1519,6 +1519,7 @@ version = "0.0.0"
 dependencies = [
  "anyhow",
  "lazy_static",
+ "log",
  "reqwest",
  "serde",
  "serde_json",

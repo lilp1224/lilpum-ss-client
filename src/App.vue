@@ -16,8 +16,8 @@ async function get_nodes() {
 }
 
 // 从文件中获取订阅地址
-async function get_cached_url(){
-  subscribe_link.value = await  invoke('get_subscription_url_from_file');
+async function get_cached_url() {
+  subscribe_link.value = await invoke('get_subscription_url_from_file');
 }
 
 get_cached_url();
@@ -62,10 +62,13 @@ function handle_select_node(node: SsNode) {
         <label class="block text-sm font-medium text-gray-300">
           本地代理状态:
           <span class="text-white">{{ used_node === null ? '关' : '开' }}</span>
+        </label>
+        <label class="block text-sm font-medium text-gray-300">
           URL: <code class="text-white bg-gray-800 rounded px-2">socks://127.0.0.1:{{ local_port }}</code>
         </label>
       </div>
 
+      <hr class="my-4 border-gray-600"/>
 
     </div>
 

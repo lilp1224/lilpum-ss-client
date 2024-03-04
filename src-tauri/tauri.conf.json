@@ -18,7 +18,7 @@
       }
     },
     "bundle": {
-      "active": false,
+      "active": true,
       "targets": "all",
       "identifier": "com.lilpum.dev",
       "icon": [
@@ -36,7 +36,7 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "lilpum-ss-client",
+        "title": "my-ss-client",
         "width": 800,
         "height": 600
       }
