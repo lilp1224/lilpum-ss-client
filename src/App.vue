@@ -64,7 +64,7 @@ function handle_select_node(node: SsNode) {
           <span class="text-white">{{ used_node === null ? '关' : '开' }}</span>
         </label>
         <label class="block text-sm font-medium text-gray-300">
-          URL: <code class="text-white bg-gray-800 rounded px-2">socks://127.0.0.1:{{ local_port }}</code>
+          URL: <code class="text-white bg-gray-800 rounded px-2">socks5://127.0.0.1:{{ local_port }}</code>
         </label>
       </div>
 
