@@ -3,5 +3,5 @@
 ```bash
 yarn
 yarn tauri build 
-yarn tauri build --target universal-apple-darwini
+yarn tauri build --target universal-apple-darwin
 ```
