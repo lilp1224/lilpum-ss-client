@@ -22,9 +22,10 @@ pub struct Node {
     pub server_port: u16,
     pub password: String,
     pub method: String,
-    pub plugin: String,
-    #[serde(rename = "plugin-opts")]
-    pub plugin_opts: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub plugin: Option<String>,
+    #[serde(rename = "plugin-opts",skip_serializing_if = "Option::is_none")]
+    pub plugin_opts: Option<String>,
     pub local_address: String,
     pub local_port: u16,
     pub remarks: String,
@@ -47,8 +48,8 @@ impl<T> From<T> for Node
             server_port: item.server_port.unwrap_or_default(),
             password: item.password.clone().unwrap_or_default(),
             method: item.method.clone(),
-            plugin: item.plugin.clone().unwrap_or_default(),
-            plugin_opts: item.plugin_opts.clone().unwrap_or_default(),
+            plugin: item.plugin.clone(),
+            plugin_opts: item.plugin_opts.clone(),
             remarks: item.remarks.clone().unwrap_or_default(),
             local_address: "127.0.0.1".into(),
             local_port: 1087,
@@ -64,20 +65,26 @@ pub fn get_nodes(url: &str) -> anyhow::Result<Vec<Node>> {
     let nodes = android_nodes
         .iter()
         .map(|x| {
-            let mut x = Node::from(x);
-            let plugin_path = {
-                #[cfg(windows)]
-                {
-                    let mut path = PROGRAM_DIR.join("v2ray-plugin");
-                    path.set_extension("exe");
-                    path
-                }
-                #[cfg(not(windows))]
-                {
-                    PROGRAM_DIR.join("v2ray-plugin")
-                }
+            let plugin = if let Some(_plugin) = &x.plugin{
+                let plugin_path = {
+                    #[cfg(windows)]
+                    {
+                        let mut path = PROGRAM_DIR.join("v2ray-plugin");
+                        path.set_extension("exe");
+                        path
+                    }
+                    #[cfg(not(windows))]
+                    {
+                        PROGRAM_DIR.join("v2ray-plugin")
+                    }
+                };
+                (Some(plugin_path.to_string_lossy().into_owned()), x.plugin_opts.clone())
+            }else {
+                (None,None)
             };
-            x.plugin = plugin_path.to_string_lossy().into_owned();
+            let mut x = Node::from(x);
+            x.plugin = plugin.0;
+            x.plugin_opts = plugin.1;
             x
         })
         .collect::<Vec<Node>>();
