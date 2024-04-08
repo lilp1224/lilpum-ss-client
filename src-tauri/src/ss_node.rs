@@ -78,13 +78,12 @@ pub fn get_nodes(url: &str) -> anyhow::Result<Vec<Node>> {
                         PROGRAM_DIR.join("v2ray-plugin")
                     }
                 };
-                (Some(plugin_path.to_string_lossy().into_owned()), x.plugin_opts.clone())
+                Some(plugin_path.to_string_lossy().into_owned())
             }else {
-                (None,None)
+                None
             };
             let mut x = Node::from(x);
-            x.plugin = plugin.0;
-            x.plugin_opts = plugin.1;
+            x.plugin = plugin;
             x
         })
         .collect::<Vec<Node>>();
